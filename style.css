@@ -1,0 +1,438 @@
+/* =========================================================================
+   ProfileBoost AI — Design System
+   Dark, modern, glassmorphism SaaS dashboard styling for Streamlit.
+   ========================================================================= */
+
+:root {
+  --pb-bg: #0B0D14;
+  --pb-bg-alt: #11141F;
+  --pb-surface: rgba(255, 255, 255, 0.045);
+  --pb-surface-border: rgba(255, 255, 255, 0.08);
+  --pb-primary: #7C5CFC;
+  --pb-primary-light: #A78BFA;
+  --pb-accent: #22D3EE;
+  --pb-pink: #F472B6;
+  --pb-green: #34D399;
+  --pb-yellow: #FBBF24;
+  --pb-red: #F87171;
+  --pb-text: #E5E7EB;
+  --pb-text-dim: #9CA3AF;
+  --pb-radius: 18px;
+  --pb-radius-sm: 12px;
+  --pb-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --pb-shadow-glow: 0 0 0 1px rgba(124, 92, 252, 0.25), 0 8px 30px rgba(124, 92, 252, 0.12);
+}
+
+/* ---------- Global page ---------- */
+html, body, [class*="css"] {
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif !important;
+  color: var(--pb-text);
+}
+
+.stApp {
+  background:
+    radial-gradient(circle at 15% 0%, rgba(124, 92, 252, 0.10), transparent 45%),
+    radial-gradient(circle at 85% 10%, rgba(34, 211, 238, 0.08), transparent 40%),
+    var(--pb-bg);
+  animation: pbFadeIn 0.6s ease-out;
+}
+
+@keyframes pbFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hide default Streamlit chrome for a cleaner SaaS feel */
+#MainMenu, footer, header { visibility: hidden; }
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4 {
+  color: var(--pb-text) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+}
+
+.pb-hero-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--pb-primary-light), var(--pb-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0;
+  animation: pbFadeIn 0.7s ease-out;
+}
+
+.pb-hero-subtitle {
+  color: var(--pb-text-dim);
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  margin-bottom: 1.6rem;
+}
+
+.pb-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--pb-text);
+  margin: 1.6rem 0 0.9rem 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--pb-surface-border);
+}
+
+.pb-section-header .pb-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pb-primary), var(--pb-accent));
+  box-shadow: 0 0 10px rgba(124, 92, 252, 0.7);
+}
+
+/* ---------- Glass cards ---------- */
+.pb-card {
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-surface-border);
+  border-radius: var(--pb-radius);
+  padding: 1.25rem 1.4rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--pb-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.pb-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--pb-shadow-glow);
+  border-color: rgba(124, 92, 252, 0.35);
+}
+
+/* ---------- KPI cards ---------- */
+.pb-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 1.2rem;
+}
+
+.pb-kpi-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-surface-border);
+  border-radius: var(--pb-radius);
+  padding: 1.1rem 1.2rem;
+  backdrop-filter: blur(14px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: pbFadeIn 0.6s ease-out;
+}
+
+.pb-kpi-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: var(--pb-shadow-glow);
+}
+
+.pb-kpi-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(124, 92, 252, 0.10), transparent 60%);
+  pointer-events: none;
+}
+
+.pb-kpi-label {
+  font-size: 0.75rem;
+  color: var(--pb-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.pb-kpi-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--pb-text);
+  line-height: 1.1;
+}
+
+.pb-kpi-value.pb-accent-primary { color: var(--pb-primary-light); }
+.pb-kpi-value.pb-accent-cyan { color: var(--pb-accent); }
+.pb-kpi-value.pb-accent-green { color: var(--pb-green); }
+.pb-kpi-value.pb-accent-pink { color: var(--pb-pink); }
+.pb-kpi-value.pb-accent-yellow { color: var(--pb-yellow); }
+
+/* ---------- Badges ---------- */
+.pb-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.pb-badge-purple { background: rgba(124, 92, 252, 0.18); color: var(--pb-primary-light); }
+.pb-badge-cyan   { background: rgba(34, 211, 238, 0.16); color: var(--pb-accent); }
+.pb-badge-green  { background: rgba(52, 211, 153, 0.16); color: var(--pb-green); }
+.pb-badge-yellow { background: rgba(251, 191, 36, 0.16); color: var(--pb-yellow); }
+.pb-badge-red    { background: rgba(248, 113, 113, 0.16); color: var(--pb-red); }
+.pb-badge-gray   { background: rgba(156, 163, 175, 0.16); color: var(--pb-text-dim); }
+
+/* ---------- Upload area ---------- */
+.pb-upload-zone {
+  border: 1.5px dashed rgba(124, 92, 252, 0.45);
+  border-radius: var(--pb-radius);
+  padding: 1.6rem;
+  background: rgba(124, 92, 252, 0.04);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.pb-upload-zone:hover {
+  border-color: var(--pb-primary);
+  background: rgba(124, 92, 252, 0.07);
+}
+
+[data-testid="stFileUploaderDropzone"] {
+  background: var(--pb-surface) !important;
+  border: 1.5px dashed rgba(124, 92, 252, 0.4) !important;
+  border-radius: var(--pb-radius-sm) !important;
+  transition: border-color 0.25s ease;
+}
+[data-testid="stFileUploaderDropzone"]:hover {
+  border-color: var(--pb-primary) !important;
+}
+
+/* ---------- Buttons ---------- */
+.stButton > button, .stDownloadButton > button {
+  background: linear-gradient(135deg, var(--pb-primary), #6D28D9) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: var(--pb-radius-sm) !important;
+  padding: 0.55rem 1.3rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 16px rgba(124, 92, 252, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+.stButton > button:hover, .stDownloadButton > button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(124, 92, 252, 0.5);
+  filter: brightness(1.08);
+}
+.stButton > button:active, .stDownloadButton > button:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* ---------- Tables ---------- */
+[data-testid="stDataFrame"] {
+  border-radius: var(--pb-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--pb-surface-border);
+}
+
+/* ---------- Tabs ---------- */
+.stTabs [data-baseweb="tab-list"] {
+  gap: 6px;
+  border-bottom: 1px solid var(--pb-surface-border);
+}
+.stTabs [data-baseweb="tab"] {
+  background: transparent;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 16px;
+  color: var(--pb-text-dim);
+  font-weight: 600;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.stTabs [aria-selected="true"] {
+  color: var(--pb-primary-light) !important;
+  background: rgba(124, 92, 252, 0.08);
+}
+
+/* ---------- Metric containers ---------- */
+[data-testid="stMetric"] {
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-surface-border);
+  border-radius: var(--pb-radius-sm);
+  padding: 0.9rem 1rem;
+  backdrop-filter: blur(10px);
+  transition: transform 0.2s ease;
+}
+[data-testid="stMetric"]:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- Progress / loading ---------- */
+.stProgress > div > div {
+  background: linear-gradient(90deg, var(--pb-primary), var(--pb-accent)) !important;
+  background-size: 200% 100%;
+  animation: pbGradientMove 1.6s linear infinite;
+}
+@keyframes pbGradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ---------- Sidebar ---------- */
+[data-testid="stSidebar"] {
+  background: var(--pb-bg-alt);
+  border-right: 1px solid var(--pb-surface-border);
+}
+
+/* ---------- Expander ---------- */
+[data-testid="stExpander"] {
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-surface-border);
+  border-radius: var(--pb-radius-sm);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 92, 252, 0.35);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(124, 92, 252, 0.55); }
+
+/* ---------- Before / After comparison ---------- */
+.pb-compare-col {
+  border-radius: var(--pb-radius);
+  padding: 1.1rem 1.3rem;
+  border: 1px solid var(--pb-surface-border);
+  backdrop-filter: blur(12px);
+}
+.pb-compare-before {
+  background: rgba(248, 113, 113, 0.06);
+  border-color: rgba(248, 113, 113, 0.25);
+}
+.pb-compare-after {
+  background: rgba(52, 211, 153, 0.06);
+  border-color: rgba(52, 211, 153, 0.25);
+}
+
+/* =========================================================================
+   HIGH-CONTRAST TEXT OVERRIDES
+   Streamlit's built-in widgets ship their own text colors tuned for
+   whichever base theme is active. These rules force every text-bearing
+   element back to our light palette so nothing gets lost against the
+   dark background, regardless of Streamlit version or base theme.
+   ========================================================================= */
+
+/* Blanket rule: any paragraph, span, label, or list text inside the app */
+.stApp, .stApp p, .stApp span, .stApp label, .stApp li,
+.stApp div[data-testid="stMarkdownContainer"] {
+  color: var(--pb-text);
+}
+
+/* Metric cards (File Summary KPIs) */
+[data-testid="stMetricValue"] {
+  color: var(--pb-text) !important;
+  font-weight: 800 !important;
+}
+[data-testid="stMetricLabel"] {
+  color: var(--pb-text-dim) !important;
+  opacity: 1 !important;
+}
+[data-testid="stMetricLabel"] p {
+  color: var(--pb-text-dim) !important;
+}
+
+/* Captions and small/help text */
+[data-testid="stCaptionContainer"],
+[data-testid="stCaptionContainer"] p,
+.stCaption, small {
+  color: var(--pb-text-dim) !important;
+  opacity: 1 !important;
+}
+
+/* Headings and section titles */
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {
+  color: var(--pb-text) !important;
+}
+
+/* Expander header + body text */
+[data-testid="stExpander"] summary,
+[data-testid="stExpander"] summary span,
+[data-testid="stExpander"] p,
+[data-testid="stExpander"] label {
+  color: var(--pb-text) !important;
+}
+
+/* File uploader helper text ("Drag and drop file here", size limit, file name) */
+[data-testid="stFileUploaderDropzone"] div,
+[data-testid="stFileUploaderDropzone"] span,
+[data-testid="stFileUploaderDropzone"] small,
+[data-testid="stFileUploaderDropzoneInstructions"] div,
+[data-testid="stFileUploaderDropzoneInstructions"] span {
+  color: var(--pb-text) !important;
+  opacity: 0.95 !important;
+}
+[data-testid="stFileUploaderFileName"] {
+  color: var(--pb-text) !important;
+}
+
+/* Sidebar text, captions, and widget labels */
+[data-testid="stSidebar"] * {
+  color: var(--pb-text) !important;
+}
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"],
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p {
+  color: var(--pb-text-dim) !important;
+  opacity: 1 !important;
+}
+
+/* Widget labels: multiselect, selectbox, slider, radio, text input */
+.stMultiSelect label, .stSelectbox label, .stSlider label,
+.stRadio label, .stTextInput label, .stFileUploader label,
+.stMultiSelect p, .stSelectbox p, .stRadio p {
+  color: var(--pb-text) !important;
+}
+
+/* Multiselect / selectbox dropdown text + selected tags */
+[data-baseweb="select"] * {
+  color: var(--pb-text) !important;
+}
+[data-baseweb="tag"] {
+  background: rgba(124, 92, 252, 0.25) !important;
+}
+
+/* Radio button option text */
+[data-testid="stRadio"] label span {
+  color: var(--pb-text) !important;
+}
+
+/* DataFrame / table text and headers */
+[data-testid="stDataFrame"] * {
+  color: var(--pb-text) !important;
+}
+[data-testid="stDataFrame"] {
+  background: var(--pb-bg-alt);
+}
+
+/* Plain st.write / st.markdown text and bullet lists */
+.stMarkdown, .stMarkdown li, .stMarkdown strong, .stMarkdown b {
+  color: var(--pb-text) !important;
+}
+
+/* Links */
+.stApp a, .stApp a:visited {
+  color: var(--pb-accent) !important;
+}
+
+/* Tab labels (inactive state was too dim) */
+.stTabs [data-baseweb="tab"] p {
+  color: inherit !important;
+}
+
+/* Text input / number input field text */
+input, textarea {
+  color: var(--pb-text) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Alert boxes (st.error / st.warning / st.success) keep readable text */
+[data-testid="stAlert"] p {
+  color: #1F2937 !important;
+}
+
